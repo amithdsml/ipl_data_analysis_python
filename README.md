@@ -15,4 +15,6 @@ Hadoop conectivity will also be attempted in this repo.
  1. Data Science,
  2. Statistics,
  3. Bigdata,
- 4. Machine Learning and AI
+ 4. Machine Learning,
+ 5. AI,
+ 6. IOT
