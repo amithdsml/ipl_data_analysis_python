@@ -71,6 +71,42 @@ spark_temp.createOrReplaceTempView("temp")
 print(spark.catalog.listTables())
 
 
+"""Dropping the middle man
+Now you know how to put data into Spark via pandas, but you're probably wondering why deal with pandas at all? Wouldn't it be easier to just read a text file straight into Spark? Of course it would!
+
+Luckily, your SparkSession has a .read attribute which has several methods for reading different data sources into Spark DataFrames. Using these you can create a DataFrame from a .csv file just like with regular pandas DataFrames!
+
+The variable file_path is a string with the path to the file airports.csv. This file contains information about different airports all over the world.
+
+A SparkSession named spark is available in your workspace."""
+
+
+# Don't change this file path
+file_path = "/usr/local/share/datasets/airports.csv"
+
+# Read in the airports data
+airports = spark.read.csv(file_path, header=True)
+
+# Show the data
+airports.show()
+
+"""Let's look at performing column-wise operations. In Spark you can do this using the .withColumn() method, which takes two arguments. First, a string with the name of your new column, and second the new column itself.
+
+The new column must be an object of class Column. Creating one of these is as easy as extracting a column from your DataFrame using df.colName.
+
+Updating a Spark DataFrame is somewhat different than working in pandas because the Spark DataFrame is immutable. This means that it can't be changed, and so columns can't be updated in place.
+
+Thus, all these methods return a new DataFrame. To overwrite the original DataFrame you must reassign the returned DataFrame using the method like so:
+
+df = df.withColumn("newCol", df.oldCol + 1)
+The above code creates a DataFrame with the same columns as df plus a new column, newCol, where every entry is equal to the corresponding entry from oldCol, plus one.
+
+To overwrite an existing column, just pass the name of the column as the first argument!
+
+Remember, a SparkSession called spark is already in your workspace."""
+
+
+
 
 
 
